@@ -80,7 +80,7 @@ public class DetailActivity extends AppCompatActivity {
                             user.setUsername(username);
                             user.setDescription(description);
                             user.setSex(gender);
-                            db.userDao().insertUser(user);
+                            db.userDao().updateUser(user);
                             Toast.makeText(DetailActivity.this,
                                     "Register success", Toast.LENGTH_SHORT).show();
                             toListUser();

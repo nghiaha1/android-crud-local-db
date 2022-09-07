@@ -71,10 +71,10 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this,
                                     "Register success", Toast.LENGTH_SHORT).show();
                             toListUser();
-                        }else
+                        } else
                             Toast.makeText(MainActivity.this,
                                     "Check the checkbox", Toast.LENGTH_SHORT).show();
-                    }else
+                    } else
                         Toast.makeText(MainActivity.this,
                                 "Username's characters > 4 and < 20", Toast.LENGTH_SHORT).show();
                 }
