@@ -20,7 +20,7 @@ import com.example.crud_demo.util.EditTextValidation;
 
 public class MainActivity extends AppCompatActivity {
      EditText edUsername, edDescription;
-     Spinner spSex;
+     Spinner spGender;
      Button btnRegister;
      CheckBox cbAccept;
      String gender = "Male";
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         edUsername = findViewById(R.id.edUsername);
         edDescription = findViewById(R.id.edDescription);
 
-        spSex = findViewById(R.id.spSex);
+        spGender = findViewById(R.id.spGender);
 
         cbAccept = findViewById(R.id.cbAccept);
         btnRegister = findViewById(R.id.btnRegister);
@@ -90,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
     private void setSpSex() {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listGender);
-        spSex.setAdapter(adapter);
-        spSex.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spGender.setAdapter(adapter);
+        spGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 gender = listGender[position];

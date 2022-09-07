@@ -24,7 +24,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
-     TextView tvId, tvUsername, tvSex;
+     TextView tvId, tvUsername, tvGender;
      AppDatabase db;
      List<UserEntity> users;
      RecyclerView rvListUser;
@@ -44,7 +44,7 @@ public class ListActivity extends AppCompatActivity {
     private void initView() {
         tvId = findViewById(R.id.tvId);
         tvUsername = findViewById(R.id.tvUsername);
-        tvSex = findViewById(R.id.tvSex);
+        tvGender = findViewById(R.id.tvSex);
         rvListUser = findViewById(R.id.rvListUser);
         btnReset = findViewById(R.id.btnReset);
     }

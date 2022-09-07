@@ -1,7 +1,6 @@
 package com.example.crud_demo.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Index;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +19,7 @@ import com.example.crud_demo.util.EditTextValidation;
 
 public class DetailActivity extends AppCompatActivity {
     EditText edUsername, edDescription;
-    Spinner spSex;
+    Spinner spGender;
     String gender;
     String[] genderList = {"Male", "Female", "Other"};
     Button btnUpdate, btnDelete;
@@ -38,7 +37,7 @@ public class DetailActivity extends AppCompatActivity {
     private void initView() {
         edUsername = findViewById(R.id.edUsername);
         edDescription = findViewById(R.id.edDescription);
-        spSex = findViewById(R.id.spSex);
+        spGender = findViewById(R.id.spGender);
         btnUpdate = findViewById(R.id.btnUpdate);
         btnDelete = findViewById(R.id.btnDelete);
 
@@ -52,8 +51,8 @@ public class DetailActivity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, genderList);
-        spSex.setAdapter(adapter);
-        spSex.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spGender.setAdapter(adapter);
+        spGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 gender = genderList[position];
@@ -82,7 +81,7 @@ public class DetailActivity extends AppCompatActivity {
                             user.setSex(gender);
                             db.userDao().updateUser(user);
                             Toast.makeText(DetailActivity.this,
-                                    "Register success", Toast.LENGTH_SHORT).show();
+                                    "Update success", Toast.LENGTH_SHORT).show();
                             toListUser();
                     }else
                         Toast.makeText(DetailActivity.this,
