@@ -36,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
         initView();
 
-        setSpSex();
-
         setBtnRegister();
     }
 
@@ -46,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         edDescription = findViewById(R.id.edDescription);
 
         spGender = findViewById(R.id.spGender);
+        setSpGender();
 
         cbAccept = findViewById(R.id.cbAccept);
         btnRegister = findViewById(R.id.btnRegister);
@@ -63,17 +62,22 @@ public class MainActivity extends AppCompatActivity {
                             "Username and description is required", Toast.LENGTH_SHORT).show();
                 }else {
                     if (EditTextValidation.isValidUsername(username)) {
-                        if (cbAccept.isChecked()) {
-                            user.setUsername(username);
-                            user.setDescription(description);
-                            user.setSex(gender);
-                            db.userDao().insertUser(user);
-                            Toast.makeText(MainActivity.this,
-                                    "Register success", Toast.LENGTH_SHORT).show();
-                            toListUser();
+                        if (db.userDao().getUserByUsername(username) == null) {
+                            if (cbAccept.isChecked()) {
+                                user.setUsername(username);
+                                user.setDescription(description);
+                                user.setSex(gender);
+                                db.userDao().insertUser(user);
+                                Toast.makeText(MainActivity.this,
+                                        "Register success", Toast.LENGTH_SHORT).show();
+                                toListUser();
+                            } else
+                                Toast.makeText(MainActivity.this,
+                                        "Check the checkbox", Toast.LENGTH_SHORT).show();
                         } else
                             Toast.makeText(MainActivity.this,
-                                    "Check the checkbox", Toast.LENGTH_SHORT).show();
+                                    "Username's not available", Toast.LENGTH_SHORT).show();
+                        
                     } else
                         Toast.makeText(MainActivity.this,
                                 "Username's characters > 4 and < 20", Toast.LENGTH_SHORT).show();
@@ -87,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void setSpSex() {
+    private void setSpGender() {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listGender);
         spGender.setAdapter(adapter);

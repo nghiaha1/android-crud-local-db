@@ -29,15 +29,22 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
         initView();
+        setSpGender();
+
         setBtnUpdate();
+
         setBtnDelete();
     }
 
     private void initView() {
         edUsername = findViewById(R.id.edUsername);
+        edUsername.setEnabled(false);
+
         edDescription = findViewById(R.id.edDescription);
         spGender = findViewById(R.id.spGender);
+
         btnUpdate = findViewById(R.id.btnUpdate);
         btnDelete = findViewById(R.id.btnDelete);
 
@@ -49,27 +56,11 @@ public class DetailActivity extends AppCompatActivity {
         edUsername.setText(user.getUsername());
         edDescription.setText(user.getDescription());
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, genderList);
-        spGender.setAdapter(adapter);
-        spGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                gender = genderList[position];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String username = edUsername.getText().toString().trim();
                 String description = edDescription.getText().toString().trim();
-                String sex = gender;
 
                 if (username.isEmpty() || description.isEmpty()) {
                     Toast.makeText(DetailActivity.this,
@@ -91,10 +82,6 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
-    private void toListUser() {
-        Intent intent = new Intent(this, ListActivity.class);
-        startActivity(intent);
-    }
 
     private void setBtnDelete() {
         btnDelete.setOnClickListener(new View.OnClickListener() {
@@ -106,5 +93,27 @@ public class DetailActivity extends AppCompatActivity {
                 toListUser();
             }
         });
+    }
+
+    private void setSpGender() {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, genderList);
+        spGender.setAdapter(adapter);
+        spGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                gender = genderList[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void toListUser() {
+        Intent intent = new Intent(this, ListActivity.class);
+        startActivity(intent);
     }
 }

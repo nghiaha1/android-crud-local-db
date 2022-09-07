@@ -65,10 +65,17 @@ public class ListActivity extends AppCompatActivity {
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.userDao().deleteAll();
-                Toast.makeText(ListActivity.this, "Reset success", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ListActivity.this, MainActivity.class);
-                startActivity(intent);
+                if (db.userDao().getAllUser().size() == 0) {
+                    Toast.makeText(ListActivity.this, "Reset success", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ListActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }else {
+                    db.userDao().deleteAll();
+                    Toast.makeText(ListActivity.this, "Reset success", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ListActivity.this, ListActivity.class);
+                    finish();
+                    startActivity(intent);
+                }
             }
         });
     }
